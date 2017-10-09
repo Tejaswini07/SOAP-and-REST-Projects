@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="0f7755c8-1e34-4a67-b24f-7682b5b8b21e" activeEnvironment="Default" name="REST Add place" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="8bfb832b-0f4b-4ce7-880e-0b54ce50bf38" wadlVersion="http://wadl.dev.java.net/2009/02" name="https://maps.googleapis.com" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://maps.googleapis.com</con:endpoint></con:endpoints><con:resource name="Json" path="/maps/api/place/add/json" id="ba2baaa0-d06f-48f6-b54f-c826ab648219"><con:settings/><con:parameters><con:parameter><con:name>key</con:name><con:value>AIzaSyBJvJHxzwwl_kdE1WX1qi92JNXH7ri5OkA</con:value><con:style>QUERY</con:style><con:default>AIzaSyBJvJHxzwwl_kdE1WX1qi92JNXH7ri5OkA</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Json 1" id="16fbc42c-0a1c-4ed5-b080-bb390494465e" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json; charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:json="https://maps.googleapis.com/maps/api/place/add/json">json:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/plain; charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="981e2c99-adf1-4dc3-95ef-41d0076da33f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://maps.googleapis.com</con:endpoint><con:request>{
+  "location": {
+    "lat": -33.8669710,
+    "lng": 151.1958750
+  },
+  "accuracy": 50,
+  "name": "Google Shoes!",
+  "phone_number": "(02) 9374 4000",
+  "address": "48 Pirrama Road, Pyrmont, NSW 2009, Australia",
+  "types": ["shoe_store"],
+  "website": "http://www.google.com.au/",
+  "language": "en-AU"
+}
+      </con:request><con:originalUri>https://maps.googleapis.com/maps/api/place/add/json</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="key" value="${#Project#key}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>key</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:testSuite id="fd85b8be-844c-4eb7-8cdc-51c45cbc91ae" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="887ab659-dadd-4db5-b99b-be7da218548f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Add place" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="add" id="1b58aa9c-b363-4d65-9bbd-bcdea1f4d76b"><con:settings/><con:config service="https://maps.googleapis.com" resourcePath="/maps/api/place/add/json" methodName="Json 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="add" id="981e2c99-adf1-4dc3-95ef-41d0076da33f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://maps.googleapis.com</con:endpoint><con:request>{
+  "location": {
+    "lat": -33.8669710,
+    "lng": 151.1958750
+  },
+  "accuracy": 50,
+  "name": "Google Shoes!",
+  "phone_number": "(02) 9374 4000",
+  "address": "48 Pirrama Road, Pyrmont, NSW 2009, Australia",
+  "types": ["shoe_store"],
+  "website": "http://www.google.com.au/",
+  "language": "en-AU"
+}
+      </con:request><con:originalUri>https://maps.googleapis.com/maps/api/place/add/json</con:originalUri><con:assertion type="GroovyScriptAssertion" id="1a968f50-774d-40b7-b9da-b241a0941770" name="Script Assertion"><con:configuration><scriptText>
+//Two ways in Scripting in SOAPUI
+
+//1)Groovy Teststep - (XML response automation) is as follows
+    //using testrunner variable or context.expand
+   //usze the sml holder class and 
+   // xml.xmlholder
+
+//2) Scripting assertions -(JSON, XML)
+
+import groovy.json.JsonSlurper //import this package
+def response= messageExchange.response.responseContent //assign the reponse we get to object as responce 
+def obj1= new JsonSlurper().parseText(response) // creat an object to the  class and parse the text or reponse 
+log.info obj1.results[4].id //to extract the value of particular array and print them
+log.info obj1.results[5].geometry.location.lat</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="key" value="${#Project#key}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>key</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties><con:property><con:name>key</con:name><con:value>AIzaSyBJvJHxzwwl_kdE1WX1qi92JNXH7ri5OkA</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
